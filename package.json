@@ -9,7 +9,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "compodoc": "npx compodoc -p tsconfig.doc.json -s -w"
   },
   "private": true,
   "dependencies": {
@@ -42,6 +43,7 @@
     "@angular/compiler-cli": "^15.0.0",
     "@angular/language-service": "^15.0.0",
     "@capacitor/cli": "4.7.1",
+    "@compodoc/compodoc": "^1.1.19",
     "@ionic/angular-toolkit": "^8.0.0",
     "@types/jasmine": "~4.0.0",
     "@types/node": "^12.11.1",
