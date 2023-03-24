@@ -1,9 +1,77 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>calls</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="toggleEdit()">
+        {{ edit ? 'Done' : 'Edit' }}
+      </ion-button>
+    </ion-buttons>
+
+    <ion-segment [(ngModel)]="segmentFilter" (ionChage)="segmentChanged()">
+      <ion-segment-button value="all">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="missed">
+        <ion-label>Missed</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="call-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title size="large">Calls</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-searchbar></ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
 
+  <!-- call item -->
+  <ion-item-sliding *ngFor="let call of calls">
+    <ion-item-options side="start">
+      <ion-item-option (click)="removeCall(call)">
+        <ion-icon 
+          name="trash"
+          color="danger"
+          slot="icon-only"
+        ></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img [src]="call.img">
+      </ion-avatar>
+      <ion-label>
+        <span [class.missed]="call.missed">{{call.name}}</span>
+        <p>
+          <ion-icon name="call" *ngIf="!call.video"></ion-icon>
+          <ion-icon name="videocam" *ngIf="call.video"></ion-icon>
+          {{ call.incoming ? 'Incoming' : 'Outgoing' }}
+        </p>
+      </ion-label>
+      <span class="date">{{ call.date | date:'dd.MM.yy' }}</span>
+
+      <ion-icon
+        name="information-circle-outline"
+        slot="end"
+        color="primary"></ion-icon>
+    </ion-item>    
+    
+    <ion-item-options side="end" (ionSwipe)="removeCall(call)">
+      <ion-item-option 
+        (click)="removeCall(call)"
+        class="delete"
+        expandable="true"
+        >Delete</ion-item-option>
+    </ion-item-options>
+
+  </ion-item-sliding>
 </ion-content>
