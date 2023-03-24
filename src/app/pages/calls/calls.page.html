@@ -6,7 +6,7 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-segment [(ngModel)]="segmentFilter" (ionChage)="segmentChanged()">
+    <ion-segment [value]="segmentFilter" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="all">
         <ion-label>All</ion-label>
       </ion-segment-button>

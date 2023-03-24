@@ -21,7 +21,8 @@ export class CallsPage implements OnInit {
   ngOnInit() {
   }
 
-  segmentChanged(){
+  segmentChanged(event){
+    this.segmentFilter = event.detail.value;
     if (this.segmentFilter == "all"){
       this.calls = this.allCalls;
     } else {
