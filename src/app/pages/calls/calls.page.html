@@ -1,5 +1,6 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header #headerwrapper>
+  <ion-toolbar #statustoolbar>
+
     <ion-buttons slot="start">
       <ion-button (click)="toggleEdit()">
         {{ edit ? 'Done' : 'Edit' }}
@@ -20,58 +21,83 @@
         <ion-icon name="call-outline" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
+
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <div class="search">
+      <ion-input
+        (ionFocus)="toggleSearch()"
+        placeholder="Search"
+        [class.active-search]="searching"
+        [class.inactive-search]="!searching">
+        <ion-icon name="search"></ion-icon>
+      </ion-input>
+
+      <ion-button
+        fill="clear"
+        color="primary"
+        size="small"
+        (click)="toggleSearch()"
+        [ngClass]="{'visible-btn': searching, 'hidden-btn': !searching}"
+        >
+        Cancel
+      </ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-header>
-    <ion-toolbar>
+<ion-content [scrollY]="!searching">
+
+  <ion-header #condenseheader>
+    <ion-toolbar class="title">
       <ion-title size="large">Calls</ion-title>
-    </ion-toolbar>
-    <ion-toolbar>
-      <ion-searchbar></ion-searchbar>
-    </ion-toolbar>
+    </ion-toolbar>    
   </ion-header>
 
+  <div class="search-overlay" #overlay (click)="toggleSearch()"></div>
+
   <!-- call item -->
-  <ion-item-sliding *ngFor="let call of calls">
-    <ion-item-options side="start">
-      <ion-item-option (click)="removeCall(call)">
-        <ion-icon 
-          name="trash"
-          color="danger"
-          slot="icon-only"
-        ></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
+  <div [@listAnimation]="calls.length">
+    <ion-item-sliding *ngFor="let call of calls">
+      <ion-item-options side="start">
+        <ion-item-option (click)="removeCall(call)">
+          <ion-icon 
+            name="trash"
+            color="danger"
+            slot="icon-only"
+          ></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
 
-    <ion-item>
-      <ion-avatar slot="start">
-        <img [src]="call.img">
-      </ion-avatar>
-      <ion-label>
-        <span [class.missed]="call.missed">{{call.name}}</span>
-        <p>
-          <ion-icon name="call" *ngIf="!call.video"></ion-icon>
-          <ion-icon name="videocam" *ngIf="call.video"></ion-icon>
-          {{ call.incoming ? 'Incoming' : 'Outgoing' }}
-        </p>
-      </ion-label>
-      <span class="date">{{ call.date | date:'dd.MM.yy' }}</span>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="call.img">
+        </ion-avatar>
+        <ion-label>
+          <span [class.missed]="call.missed">{{call.name}}</span>
+          <p>
+            <ion-icon name="call" *ngIf="!call.video"></ion-icon>
+            <ion-icon name="videocam" *ngIf="call.video"></ion-icon>
+            {{ call.incoming ? 'Incoming' : 'Outgoing' }}
+          </p>
+        </ion-label>
+        <span class="date">{{ call.date | date:'dd.MM.yy' }}</span>
 
-      <ion-icon
-        name="information-circle-outline"
-        slot="end"
-        color="primary"></ion-icon>
-    </ion-item>    
-    
-    <ion-item-options side="end" (ionSwipe)="removeCall(call)">
-      <ion-item-option 
-        (click)="removeCall(call)"
-        class="delete"
-        expandable="true"
-        >Delete</ion-item-option>
-    </ion-item-options>
+        <ion-icon
+          name="information-circle-outline"
+          slot="end"
+          color="primary"></ion-icon>
+      </ion-item>    
+      
+      <ion-item-options side="end" (ionSwipe)="removeCall(call)">
+        <ion-item-option 
+          (click)="removeCall(call)"
+          class="delete"
+          expandable="true"
+          >Delete</ion-item-option>
+      </ion-item-options>
 
-  </ion-item-sliding>
+    </ion-item-sliding>
+  </div>
 </ion-content>
