@@ -24,10 +24,12 @@
 
   </ion-toolbar>
 
+  <!-- search bar -->
   <ion-toolbar>
     <div class="search">
       <ion-input
         (ionFocus)="toggleSearch()"
+        (ionInput)="filterCalls($event)"
         placeholder="Search"
         [class.active-search]="searching"
         [class.inactive-search]="!searching">
@@ -42,9 +44,10 @@
         [ngClass]="{'visible-btn': searching, 'hidden-btn': !searching}"
         >
         Cancel
-      </ion-button>
+      </ion-button>      
     </div>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content [scrollY]="!searching">
@@ -90,7 +93,7 @@
           color="primary"></ion-icon>
       </ion-item>    
       
-      <ion-item-options side="end" (ionSwipe)="removeCall(call)">
+      <ion-item-options side="end" (ionSwipe)="swipeDelete(call)">
         <ion-item-option 
           (click)="removeCall(call)"
           class="delete"
