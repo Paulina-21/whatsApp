@@ -74,7 +74,26 @@ export class CallsPage implements OnInit {
     this.calls = this.calls.filter(c=>c.id != call.id);
   }
 
+  swipeDelete(item) {
+    this.removeCall(item);
+  }
+
+  filterCalls(event) {
+    this.calls = this.allCalls
+    .filter(call => call.name
+        .toLowerCase()
+        .includes(event.target.value.toLowerCase()));
+  }
+
   async toggleSearch(){
+    this.animateSearch();
+    
+    setTimeout(() => {
+      this.searching = !this.searching;
+    }, 100);
+  }
+
+  animateSearch(){
     const titleToolbar = this.condenseheader.nativeElement;
 
     //Fade out the status bar area
@@ -114,9 +133,6 @@ export class CallsPage implements OnInit {
       .beforeStyles({'z-index': 2})
       .play();
     }
-      setTimeout(() => {
-      this.searching = !this.searching;
-    }, 100);
   }
 
 }
