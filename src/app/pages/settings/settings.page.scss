@@ -1,0 +1,23 @@
+ion-content {
+    --background: #f1f2f6;
+    }
+    .transparent {
+    --background: transparent;
+    }
+
+ion-avatar {
+    width: 60px;
+    height: 60px;
+    }
+
+ion-icon {
+    padding: 5px;
+    color: #fff;
+    border-radius: 6px;
+    }
+
+ion-list {
+    margin-top: 40px;
+    border-top: 0.5px solid #cbcacd;
+    border-bottom: 0.5px solid #cbcacd;
+    }    
