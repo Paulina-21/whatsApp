@@ -12,10 +12,12 @@ $RECYCLE.BIN/
 *.log
 log.txt
 
-
 /.sourcemaps
 /.versions
 /coverage
+
+# Documentation
+/documentation
 
 # Ionic
 /.ionic
