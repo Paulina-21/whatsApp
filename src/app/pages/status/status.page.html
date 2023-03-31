@@ -1,9 +1,57 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>status</ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="primary">
+        Privacy
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Status
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="light">
+      <ion-title size="large">Status</ion-title>
+    </ion-toolbar>
+    <ion-toolbar color="light">
+      <ion-searchbar placeholder="Search">
+      </ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item lines="none">
+    <ion-avatar slot="start">
+      <img src="https://i.pravatar.cc/150?u=hanshansen@hotmail.com">
+    </ion-avatar>
+    <ion-label>
+      My Status
+      <p>Add to my status</p>
+    </ion-label>
+    <div slot="end" class="action-btns">
+      <div class="btn">
+        <ion-icon name="camera" slot="icon-only" color="primary"></ion-icon>
+      </div>
+      <div class="btn">
+        <ion-icon name="pencil" slot="icon-only" color="primary"></ion-icon>
+      </div>
+    </div>
+  </ion-item>
+
+  <ion-item-divider>
+    RECENT UPDATES
+  </ion-item-divider>
+
+  <ion-item lines="none" button (click)="openStory()" detail="false">
+    <ion-avatar slot="start">
+      <img src="https://i.pravatar.cc/150?u=hanshansen@hotmail.com" class="active-status">
+    </ion-avatar>
+    <ion-label>
+      Max Lynch
+      <p>13h ago</p>
+    </ion-label>
+  </ion-item>
 
 </ion-content>
