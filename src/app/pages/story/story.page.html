@@ -35,3 +35,23 @@
   </div>
 
 </ion-content>
+
+<ion-footer [hidden]="!replyVisible">
+  <ion-toolbar color="light">
+    <ion-row class="ion-align-items-center ion-no-padding">
+      <ion-col size="1" class="ion-no-padding ion-text-center">
+        <ion-icon name="add-outline" color="primary" size="large"></ion-icon>
+      </ion-col>
+      <ion-col size="8">
+        <ion-textarea class="message-input" autoGrow="true" rows="1" #msginput>
+          <ion-icon name="document-outline" class="file-select" tappable color="primary"></ion-icon>
+
+        </ion-textarea>
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        <ion-icon name="camera-outline" color="primary" size="large" class="ion-margin-end"></ion-icon>
+        <ion-icon name="mic-outline" color="primary" size="large"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
