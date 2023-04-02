@@ -26,6 +26,8 @@ import storyData from "../../../assets/data/story.json";
 })
 export class StoryPage implements OnInit, AfterViewInit {
 
+  @ViewChild('msginput') msginput: IonTextarea;
+
   info = storyData as {
     stories: [{ date: string; text: string; img: string }];
     from: string;
@@ -125,7 +127,6 @@ export class StoryPage implements OnInit, AfterViewInit {
 
   reply() {
     this.replyVisible = true;
-    // TODO: add the viewchild later
-    //this.msginput.setFocus();
+    this.msginput.setFocus();
   }
 }
