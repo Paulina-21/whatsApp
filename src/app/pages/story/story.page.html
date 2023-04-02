@@ -1,9 +1,37 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>story</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [style.background]="getImage()" scrollY="false">
+  <div class="bg-touch" (click)="tapBg($event)"></div>
 
-<ion-content>
+  <div class="progress-bar" [class.hide]="hideBar">
+    <div class="progress" *ngFor="let story of info.stories; let i = index;">
+      <div class="progress-fill" [style.width]="progress[i]+'%'"></div>
+    </div>
+  </div>
+
+  <ion-item class="top-bar ion-no-padding" lines="none" [class.hide]="hideBar">
+    <ion-button slot="start" fill="clear" (click)="close()">
+      <ion-icon name="chevron-back" slot="icon-only" color="light"></ion-icon>
+    </ion-button>
+    <ion-avatar>
+      <img [src]="info.image">
+    </ion-avatar>
+    <ion-label>
+      {{ info.from }}
+    <p>{{ info.stories[activeStory].date | date:'short' }}</p>
+    </ion-label>
+
+    <ion-button fill="clear" slot="end">
+      <ion-icon name="ellipsis-horizontal" color="light" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <div class="msg">
+    <ion-label color="light" #label>
+      {{ info.stories[activeStory].text }}
+    </ion-label>
+    <div class="border" #border></div>
+    <ion-button (click)="reply()" fill="clear" #replybtn class="reply">
+      <ion-icon name="chevron-up" slot="icon-only" color="light"></ion-icon>
+    </ion-button>
+  </div>
 
 </ion-content>
